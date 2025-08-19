@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Crop Recommendation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        /* Background and font */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1367&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        /* Overlay for dim background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            height: 100%; width: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 620px;
+            background: rgba(255,255,255,0.15);
+            margin: 4% auto 7% auto;
+            padding: 30px 45px 50px 45px;
+            border-radius: 20px;
+            box-shadow: 0 9px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(9px);
+            animation: fadeIn 1.5s ease-in-out forwards;
+            opacity: 0;
+            text-align: center;
+        }
+
+        /* Logo */
+        .logo {
+            max-width: 140px;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 5px #56ab2f);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-shadow: 0 2px 7px rgba(0,0,0,0.8);
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        label {
+            margin-top: 22px;
+            margin-left: 5px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #dcefdc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        label:hover {
+            color: #a2d68f;
+        }
+
+        /* Icons next to labels */
+        label img {
+            width: 26px;
+            height: 26px;
+            filter: drop-shadow(0 0 2px #56ab2f);
+        }
+
+        input[type="number"] {
+            margin-top: 6px;
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            transition: box-shadow 0.4s ease;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        input[type="number"]:focus {
+            box-shadow: 0 0 14px #79c753;
+        }
+
+        input[type="submit"] {
+            margin-top: 38px;
+            width: 100%;
+            padding: 16px 0;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(90deg, #56ab2f 0%, #a8e063 100%);
+            color: #111;
+            font-size: 1.4rem;
+            font-weight: 900;
+            cursor: pointer;
+            letter-spacing: 1.1px;
+            box-shadow: 0 8px 24px #5cbc35a6;
+            transition: background 0.35s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(90deg, #a8e063 0%, #56ab2f 100%);
+            box-shadow: 0 12px 32px #7fd342aa;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 670px) {
+            .container {
+                margin: 8% 25px 10% 25px;
+                padding: 25px 25px 40px 25px;
+            }
+            label {
+                font-size: 1rem;
+            }
+            input[type="submit"] {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="https://img.icons8.com/ios-filled/100/56ab2f/plant-under-rain.png" alt="Crop Logo" class="logo" />
+
+        <h1>Crop Recommendation System</h1>
+
+        <form action="/predict" method="post" autocomplete="off">
+            <label for="N"><img src="https://img.icons8.com/ios-filled/50/56ab2f/test-tube.png" alt="Nitrogen"/>Nitrogen (N)</label>
+            <input type="number" id="N" name="N" step="any" required />
+
+            <label for="P"><img src="https://img.icons8.com/ios-filled/50/56ab2f/chemical-weapon.png" alt="Phosphorus"/>Phosphorus (P)</label>
+            <input type="number" id="P" name="P" step="any" required />
+
+            <label for="K"><img src="https://img.icons8.com/ios-filled/50/56ab2f/kalium.png" alt="Potassium"/>Potassium (K)</label>
+            <input type="number" id="K" name="K" step="any" required />
+
+            <label for="temperature"><img src="https://img.icons8.com/ios-filled/50/56ab2f/temperature.png" alt="Temperature"/>Temperature (°C)</label>
+            <input type="number" id="temperature" name="temperature" step="any" required />
+
+            <label for="humidity"><img src="https://img.icons8.com/ios-filled/50/56ab2f/humidity.png" alt="Humidity"/>Humidity (%)</label>
+            <input type="number" id="humidity" name="humidity" step="any" required />
+
+            <label for="ph"><img src="https://img.icons8.com/ios-filled/50/56ab2f/ph-scale.png" alt="pH"/>pH Level</label>
+            <input type="number" id="ph" name="ph" step="any" required />
+
+            <label for="rainfall"><img src="https://img.icons8.com/ios-filled/50/56ab2f/rain.png" alt="Rainfall"/>Rainfall (mm)</label>
+            <input type="number" id="rainfall" name="rainfall" step="any" required />
+
+            <input type="submit" value="Recommend Crop" />
+        </form>
+    </div>
+</body>
+</html>
