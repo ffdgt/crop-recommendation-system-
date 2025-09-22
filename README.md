@@ -17,8 +17,6 @@ A machine learning-based crop recommendation web application that suggests the m
 
 ### Project Structure
 
-Here is the entire README content, ready for you to copy and paste directly into your GitHub repository's README.md file.
-
 # Crop Recommendation System
 
 A machine learning-based crop recommendation web application that suggests the most suitable crop based on soil nutrients and environmental parameters. The app is built using Python, Flask, and scikit-learn, providing an an intuitive and responsive user interface for farmers and agricultural researchers.
